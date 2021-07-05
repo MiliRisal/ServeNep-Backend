@@ -1,8 +1,9 @@
 const mongoose =require('mongoose');
 const express=require('express');
 const bodyParser=require('body-parser');
-const cors =require('cors');
-const bd=require('./database/db');
+const cors =require('cors')
+
+const bd = require('./database/db');
 
 const user_route = require('./routes/user_route');
 

@@ -86,9 +86,7 @@ user.findOne({email: email})
 }).catch(function (e) {
     res.status(500).json({Error: e});
 })
-
-
-})
+});
 
 //......... get all user 
 router.get('/user/all',function(req,res){
@@ -99,7 +97,7 @@ router.get('/user/all',function(req,res){
     .catch(function(err){
         res.status(500).json({error:err})
     })
-})
+});
    // get Single user...........
    router.get("/user/:user_id", function(req, res) {
     const id = req.params.user_id;
@@ -110,6 +108,16 @@ router.get('/user/all',function(req,res){
     res.status(200) .json({error:er})
     })
 
-})
+});
+
+//............search by name
+router.get('/search/:fullName', function(req, res){
+    var name = new RegExp(req.params.fullName,'i');
+    user.find({fullName:name }) 
+    .then((result)=>{
+        res.status(200).json(result)
+
+    })
+});
 
 module.exports = router;

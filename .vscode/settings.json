@@ -6,6 +6,7 @@
         "Userdetail",
         "authcheck",
         "customerdata",
+        "gridfs",
         "kiran",
         "secretkey",
         "servnep",

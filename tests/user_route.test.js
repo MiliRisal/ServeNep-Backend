@@ -14,9 +14,8 @@ describe('Test for user route', () => {
         .send({
             "fullName":"kiran Gautam",
             "phone": "980898989",
-            "address": "Maitidevi, Kathmandu",
             "email": "gautamkiran38@gmail.com",
-             "role": "Customer",
+            "address": "Maitidevi, Kathmandu",
              "password": "password"
         })
         .then(res => {
@@ -28,9 +27,8 @@ describe('Test for user route', () => {
         return request(app).post('/user/insert')
         .send({
             "fullName":"kiran Gautam",
-            "address": "Maitidevi, Kathmandu",
             "email": "gautamkiran38@gmail.com",
-             "role": "Customer",
+            "address": "Maitidevi, Kathmandu",
              "password": "password"
         })
         .then(res => {

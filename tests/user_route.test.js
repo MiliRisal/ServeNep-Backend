@@ -1,10 +1,10 @@
-const express = require('express');
-const request = require('supertest');
+var express = require('express');
+var request = require('supertest');
 
-const user_route = require('../routes/user_route');
+var user_route = require('../routes/user_route');
 require('./setup');
 
-const app = express();
+var app = express();
 app.use(express.json());
 app.use("/", user_route);
 

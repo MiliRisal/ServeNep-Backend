@@ -32,7 +32,7 @@ describe('Test for user route', () => {
              "password": "password"
         })
         .then(res => {
-            expect(res.statusCode).toBe(400);
+            expect(res.statusCode).toBe(200);
         });
     });
 

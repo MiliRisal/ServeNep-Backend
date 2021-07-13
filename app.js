@@ -1,20 +1,22 @@
-const mongoose =require('mongoose');
-const express=require('express');
-const bodyParser=require('body-parser');
-const cors =require('cors')
+var mongoose =require('mongoose');
+var express=require('express');
+var bodyParser=require('body-parser');
+var cors =require('cors');
 
-const bd = require('./database/db');
+var bd = require('./database/db');
 
-const user_route = require('./routes/user_route');
+var user_route = require('./routes/user_route');
+var description_route = require('./routes/description_route');
 
-const app = express();
+var app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(user_route);
+app.use(description_route);
 
 app.listen(90, () => {
-    console.log("This server is running at port : 90")
-})
+    console.log("This server is running at port : 90");
+});

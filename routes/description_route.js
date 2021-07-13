@@ -1,5 +1,5 @@
 var express =require('express');
-var description = require('../models/description_models');
+var description = require('../models/description_model');
 var router = express.Router();
 
 router.post('/description/insert', function(req, res){
@@ -17,7 +17,7 @@ router.post('/description/insert', function(req, res){
     });
     descriptionData.save()
     .then(function(result){
-        res.status(201).json({success:true, message:"Description Insert Success"});
+        res.status(201).json({success:true, message:"Description added Success"});
     }).catch(function(e){
         res.status(500).json({message:e, success:false});
     });

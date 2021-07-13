@@ -1,4 +1,4 @@
-const mongoose=require('mongoose')
+const mongoose=require('mongoose');
 
 const user = mongoose.model('user',{
     fullName:{
@@ -29,5 +29,5 @@ const user = mongoose.model('user',{
         enum : ['Tasker','Customer'],
         default : 'Customer'
     },
-})
+});
 module.exports = user;

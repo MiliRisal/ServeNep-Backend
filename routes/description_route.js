@@ -7,12 +7,14 @@ router.post('/description/insert', function(req, res){
     var taskDescription= req.body.taskDescription;
     var  estimatedTime = req.body.estimatedTime;
     var price = req.body.price;
+    var addedby=req.user;
 
     var descriptionData = new description({
         title: title,
         taskDescription: taskDescription,
         estimatedTime: estimatedTime,
         price: price,
+        addedby: addedby,
 
     });
     descriptionData.save()

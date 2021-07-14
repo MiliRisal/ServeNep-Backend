@@ -1,11 +1,18 @@
 var express =require('express');
 var specification = require('../models/specification_model');
+<<<<<<< HEAD
 var auth = require('../middleware/authcheck');
 const router = express.Router();
 
 router.post('/specification/insert',
 // authcheck.verifyuser,authcheck.verifyTasker,
 function(req, res){
+=======
+var authcheck = require('../middleware/authcheck');
+var router = express.Router();
+
+router.post('/specification/insert',authcheck.verifyuser, authcheck.verifyTasker,function(req, res){
+>>>>>>> 3bf264e2b2c879ad8f023218faa2cc835d144414
     var name = req.body.name;
     var category = req.body.category;
     var price = req.body.price;

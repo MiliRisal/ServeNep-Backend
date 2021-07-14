@@ -13,6 +13,10 @@ var description = mongoose.model('description',{
     },
     price:{
         type:String,
-    }
+    },
+    addedby:{
+        type: Object,
+        ref:'user',
+    },
 });
 module.exports = description;

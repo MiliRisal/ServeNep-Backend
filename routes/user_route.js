@@ -63,7 +63,7 @@ user.findOne({email: email})
     if (userdata===null) {
         return res.status(403).json({
             message: "Login Fail!!!"
-        })
+        });
     }
       // username found
       bcryptjs.compare(password, userdata.password, function (error, res1) {
@@ -81,7 +81,7 @@ user.findOne({email: email})
             success: true,
             role:userdata.role
             
-        })
+        });
 
     })
 

@@ -6,11 +6,11 @@ router.post('/booking/insert', function(req, res){
     var userid = req.user;
     var descriptionid = req.description;
 
-    var booking = new booking({
+    var bookingData = new booking({
 userid: userid,
 descriptionid: descriptionid,
     });
-    booking.save()
+    bookingData.save()
     .then(function(result){
         res.status(201).json({success:true, message:"booking done Success"});
     }).catch(function(e){

@@ -9,10 +9,10 @@ app.use(express.json());
 app.use("/", description_route);
 
 describe('Test for description route', () => {
-    test('should be able to write description by user', () => {
+    test('should be able to add description sucessfully ', () => {
         return request(app).post('/description/insert')
         .send({
-           "title":"claner",
+        "title":"claner",
         "taskDescription":"house cleaning",
         "estimatedTime":"2",
         "price": "5000",
@@ -23,43 +23,18 @@ describe('Test for description route', () => {
         });
     });
 
-    test('should not be able to register a user without a phone no', () => {
-        return request(app).post('/user/insert')
+    test('should not be able to add description without taskdescription', () => {
+        return request(app).post('/description/insert')
         .send({
-            "fullName":"kiran Gautam",
-            "email": "gautamkiran38@gmail.com",
-            "address": "Maitidevi, Kathmandu",
-             "password": "password"
+
+            "title":"claner",
+            "estimatedTime":"2",
+            "price": "5000",
+            "addedby": "user",
         })
         .then(res => {
-            expect(res.statusCode).toBe(200);
+            expect(res.statusCode).toBe(201);
         });
     });
-
-    test('should be able to login', ()=> {
-        return request(app).post('/user/login')
-        .send({
-            "email": "gautamkiran38@gmail.com",
-            "password": "password"
-            
-        })
-        .then(res=> {
-            expect(res.statusCode).toBe(200);
-        });
-    });
-    
-    test('should not be able to login with wrong password', ()=> {
-        return request(app).post('/user/login')
-        .send({
-
-             "email": "gautamkiran38@gmail.com",
-            "password": "password"
-           
-        })
-        .then(res=> {
-            expect(res.statusCode).toBe(200);
-        });
-    });
-
     
 });

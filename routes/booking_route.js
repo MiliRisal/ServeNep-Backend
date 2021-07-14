@@ -10,7 +10,7 @@ router.post('/booking/insert', function(req, res){
 userid: userid,
 descriptionid: descriptionid,
     });
-    descriptionData.save()
+    booking.save()
     .then(function(result){
         res.status(201).json({success:true, message:"booking done Success"});
     }).catch(function(e){

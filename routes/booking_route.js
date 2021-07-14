@@ -17,6 +17,23 @@ descriptionid: descriptionid,
         res.status(500).json({message:e, success:false});
     });
 });
+router.get('/booking/all', function(req, res){
+    booking.find().then(function(data){
+        res.status(200).json({data});
+    })
+    .catch(function(error){
+        res.status(500).json({error:error});
+    });
+});
 
+router.get('/booking/:booking_id:', function(req, res){
+    const id = req.params.booking_id;
+    booking.findOne({_id:id}).then(function(result){
+        res.status(200).json({result});
+    })
+    .catch(function(error){
+        res.status(500).json({error: error});
+    });
+});
 
 module.exports=router;

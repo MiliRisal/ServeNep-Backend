@@ -4,13 +4,16 @@
         "Maitidevi",
         "Tasker",
         "Userdetail",
+        "addedby",
         "authcheck",
         "customerdata",
+        "descriptionid",
         "gridfs",
         "kiran",
         "secretkey",
         "servnep",
         "userdata",
+        "userid",
         "usertype",
         "verifyuser"
     ]

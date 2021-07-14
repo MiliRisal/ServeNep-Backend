@@ -1,9 +1,9 @@
 var express =require('express');
 var specification = require('../models/specification_model');
 var authcheck = require('../middleware/authcheck');
-route = express.Router();
+var router = express.Router();
 
-router.post('/specification/insert',authcheck.verifyuser,authcheck.verifyTasker,function(req, res){
+router.post('/specification/insert',authcheck.verifyuser, authcheck.verifyTasker,function(req, res){
     var name = req.body.name;
     var category = req.body.category;
     var price = req.body.price;

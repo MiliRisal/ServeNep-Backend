@@ -1,9 +1,11 @@
 var express =require('express');
 var specification = require('../models/specification_model');
-var authcheck = require('../middleware/authcheck');
-route = express.Router();
+var auth = require('../middleware/authcheck');
+const router = express.Router();
 
-router.post('/specification/insert',authcheck.verifyuser,authcheck.verifyTasker,function(req, res){
+router.post('/specification/insert',
+// authcheck.verifyuser,authcheck.verifyTasker,
+function(req, res){
     var name = req.body.name;
     var category = req.body.category;
     var price = req.body.price;
@@ -22,7 +24,9 @@ specificationData.save()
 
 });
 });
-router.get('/specification/all',authcheck.verifyuser, function(req, res){
+router.get('/specification/all',
+// authcheck.verifyuser, 
+function(req, res){
     specification.find().then(function(data){
         res.status(200).json({data});
     })
@@ -31,7 +35,9 @@ router.get('/specification/all',authcheck.verifyuser, function(req, res){
    });
 });
 
-router.get('/specification/:specification_id:',authcheck.verifyuser, function(req, res){
+router.get('/specification/:specification_id:',
+// authcheck.verifyuser, 
+function(req, res){
     const id = req.params.specification_id;
     specification.findOne({_id:id}).then(function(result){
         res.status(200).json(result);

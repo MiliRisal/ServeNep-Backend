@@ -78,8 +78,8 @@ user.findOne({email: email})
         }, 'secretkey')
         res.status(200).json({
             token: token,
-            success: true, 
-            usertype:userdata.role
+            success: true,
+            role:userdata.role
             
         })
 

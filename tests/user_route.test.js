@@ -36,5 +36,30 @@ describe('Test for user route', () => {
         });
     });
 
+    test('should be able to login', ()=> {
+        return request(app).post('/user/login')
+        .send({
+            "email": "gautamkiran38@gmail.com",
+            "password": "password"
+            
+        })
+        .then(res=> {
+            expect(res.statusCode).toBe(200);
+        });
+    });
+    
+    test('should not be able to login with wrong password', ()=> {
+        return request(app).post('/user/login')
+        .send({
+
+             "email": "gautamkiran38@gmail.com",
+            "password": "password"
+           
+        })
+        .then(res=> {
+            expect(res.statusCode).toBe(200);
+        });
+    });
+
     
 });

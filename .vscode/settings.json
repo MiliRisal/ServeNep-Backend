@@ -10,6 +10,7 @@
         "descriptionid",
         "gridfs",
         "kiran",
+        "originalname",
         "secretkey",
         "servnep",
         "userdata",

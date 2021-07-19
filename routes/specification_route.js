@@ -46,5 +46,14 @@ function(req, res){
         res.status(500).json({error:error});
     });
 });
+//............search by name
+router.get('/search/:category', function(req, res){
+    var category = new RegExp(req.params.category,'i');
+    specification.find({category:category }) 
+    .then((result)=>{
+        res.status(200).json(result)
+
+    })
+});
 
 module.exports=router;

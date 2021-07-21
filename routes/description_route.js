@@ -65,7 +65,7 @@ router.put('/description/update/:description_id', function(req, res){
 
 });
 
-router.delete("/Product/delete/:description_id", function(req,res){
+router.delete("/description/delete/:description_id", function(req,res){
     const id =req.params.description_id;
     description.deleteOne({_id:id}).then(function(result){
     res.status(200).json({success:true, message:"description Delete Success"});

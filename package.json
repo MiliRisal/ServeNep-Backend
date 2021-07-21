@@ -1,7 +1,6 @@
 {
   "name": "servnep",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "start": " nodemon /app.js",
@@ -27,4 +26,5 @@
     "path": "^0.12.7",
     "supertest": "^6.1.3"
   }
+
 }

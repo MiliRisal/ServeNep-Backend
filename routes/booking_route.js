@@ -3,8 +3,8 @@ var booking = require('../models/booking_model');
 var router = express.Router();
 
 router.post('/booking/insert', function(req, res){
-    var userid = req.user;
-    var descriptionid = req.description;
+    var userid = req.userid;
+    var descriptionid = req.descriptionid;
 
     var bookingData = new booking({
 userid: userid,

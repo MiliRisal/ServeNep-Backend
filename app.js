@@ -10,6 +10,7 @@ var description_route = require('./routes/description_route');
 var specification = require('./routes/specification_route');
 var booking = require('./routes/booking_route');
 var category = require('./routes/category_route');
+var notification = require('./routes/notification_route');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(description_route);
 app.use(specification);
 app.use(booking);
 app.use(category);
+app.use(notification);
 
 app.listen(90, () => {
     console.log("This server is running at port : 90");

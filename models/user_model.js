@@ -31,7 +31,7 @@ const user = mongoose.model('user',{
     },
     category:{
         type:String,
-        enum : ['Cleaner','Electrician','sweeper','carpenter','Delivery','carpenter','Plumber','Mechanic'],
+      
         
     },
     price:{

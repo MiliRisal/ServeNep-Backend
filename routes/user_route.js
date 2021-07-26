@@ -9,12 +9,16 @@ const {check,validationResult} = require('express-validator');
 
 
 //........Insert................
-router.post('/user/insert',[
+router.post('/user/insert',profile.single('profileImage'),[
     check('email',"User email is required!").not().isEmpty(),
     check('password',"User password is required!").not().isEmpty(),
 ],
 function(req, res){
-    const ValidationError = validationResult(req);
+    if(req.file==undefined){
+        return res.status(400).json({
+        message:"jpg and png format allowed"});
+    }
+    var ValidationError = validationResult(req);
     if (ValidationError.isEmpty()) {
 const fullName=req.body.fullName;
 const phone=req.body.phone;
@@ -22,6 +26,10 @@ const email=req.body.email;
 const address=req.body.address;
 const role=req.body.role;
 const password=req.body.password;
+const price=req.body.price;
+const category=req.body.category;
+const profileImage= req.file.path;
+
 
 bcryptjs.hash(password,10,function(err,password){
     const data = new user({
@@ -30,10 +38,14 @@ bcryptjs.hash(password,10,function(err,password){
         email:email,
         address:address,
         role:role,
-        password:password,});
+        password:password,
+        price: price,
+        category: category,
+        profileImage: profileImage,
+    
+    });
 
-        data
-        .save()
+        data.save()
         .then(function(result){
             res.status(201).json({
                 success: true,
@@ -43,7 +55,6 @@ bcryptjs.hash(password,10,function(err,password){
         .catch((error) =>
         res.json({ message: error.message, success: false })
         );
-
 });
 
 } else{
@@ -123,13 +134,14 @@ router.get('/search/:fullName', function(req, res){
 });
 
 router.put('/specification/add/:userid', function(req, res){
-var fullName = req.body.fullName;
-var email=req.body.email;
-var phone = req.body.phone;
-var address=req.body.address;
-var price=req.body.price;
-var category=req.body.category;
-var id =req.body.userid;
+const fullName = req.body.fullName;
+const email=req.body.email;
+const phone = req.body.phone;
+const address=req.body.address;
+const price=req.body.price;
+const category=req.body.category;
+const id =req.body.userid;
+const profileImage=req.file.path;
 
 user.updateOne({_id:id},{
 fullName: fullName,
@@ -138,6 +150,7 @@ phone:phone,
 address:address,
 price: price,
 category: category,
+profileImage: profileImage,
 }) 
 .then(function(result){
     res.status(200).json({success:true, message:"user specification added successful"});

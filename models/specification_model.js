@@ -16,5 +16,9 @@ var specification = mongoose.model('specification',{
         enum : ['Cleaner','Electrician','sweeper','carpenter','Delivery','carpenter','Plumber','Mechanic'],
         required:true,
     },
+    added:{
+        type:Object,
+        ref:'user', 
+    }
 });
 module.exports = specification;

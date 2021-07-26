@@ -9,7 +9,7 @@ app.use(express.json());
 app.use("/", booking_route);
 
 describe('Test for booking route', () => {
-    test('should be able to booking tasker sucessfully ', () => {
+    test('should be able to booking tasker successfully ', () => {
         return request(app).post('/booking/insert')
         .send({
 

@@ -14,11 +14,11 @@ describe('Test for category route', () => {
         .send({
             
             "categoryName": "Mechanic",
-            "image": "1626885967150camera.jpg",
+            "image": "files\1626885967150camera.jpg",
          
         })
         .then(res => {
-            expect(res.statusCode).toBe(200);
+            expect(res.statusCode).toBe(201);
         });
     });
 

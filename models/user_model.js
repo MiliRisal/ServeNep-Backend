@@ -28,5 +28,17 @@ const user = mongoose.model('user',{
         enum : ['Tasker','Customer'],
         default : 'Customer'
     },
+    category:{
+        type:String,
+      
+        
+    },
+    price:{
+        type:Number,
+    },
+    profileImage:{
+        type:String,
+        trim:true
+    }
 });
 module.exports = user;

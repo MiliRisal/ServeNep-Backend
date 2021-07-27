@@ -12,7 +12,7 @@ module.exports.verifyuser = function(req, res, next) {
        // console.log(data.customerdata._id)
         User.findOne({_id:data1.CustomerId})
         .then (function(result){
-            req.userInfo =result;   // all information about the user (username, password, usertype)
+            req.userInfo = result;   // all information about the user (username, password, usertype)
             next();
 
         })

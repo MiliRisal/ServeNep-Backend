@@ -2,10 +2,10 @@ const multer = require ('multer');
 
 const storage = multer.diskStorage({
     destination :function(req,file,cb){
-        cb(null,'./category');
+        cb(null,'./image');
     },
     filename :function(req,file,cb){
-        cb(null, Date.now() + file.originalname);
+        cb(null, Date.now() + '-' +file.originalname);
     }
   
 });
@@ -19,9 +19,9 @@ const storage = multer.diskStorage({
     }
 
 };
-const upload =multer({
+const profile = multer({
     storage:storage,
     fileFilter:filter
 });
 
-module.exports=upload;
+module.exports=profile;

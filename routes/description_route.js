@@ -27,17 +27,17 @@ router.post('/description/insert', function(req, res){
 
 router.get('/description/all', function(req, res){
     description.find().then(function(data){
-        res.status(200).json({data});
+        res.status(200).json({success: true, data});
     })
     .catch(function(error){
         res.status(500).json({error:error});
    });
 });
 
-router.get('/description/:description_id:', function(req, res){
+router.get('/description/:description_id', function(req, res){
     const id = req.params.description_id;
     description.findOne({_id:id}).then(function(result){
-        res.status(200).json(result);
+        res.status(200).json({success: true, result});
     })
     .catch(function(error){
         res.status(500).json({error:error});
@@ -65,7 +65,7 @@ router.put('/description/update/:description_id', function(req, res){
 
 });
 
-router.delete("/Product/delete/:description_id", function(req,res){
+router.delete("/description/delete/:description_id", function(req,res){
     const id =req.params.description_id;
     description.deleteOne({_id:id}).then(function(result){
     res.status(200).json({success:true, message:"description Delete Success"});

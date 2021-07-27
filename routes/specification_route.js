@@ -18,7 +18,7 @@ area: area,
 });
 specificationData.save()
 .then(function(result){
-    res.status(201).json({success:true, message:"specification added Success"});
+    ressearch.status(201).json({success:true, message:"specification added Success"});
 }).catch(function(e){
     res.status(500).json({message:e, success:false});
 
@@ -52,7 +52,6 @@ router.get('/search/:category', function(req, res){
     specification.find({category:category }) 
     .then((result)=>{
         res.status(200).json(result)
-
     })
 });
 

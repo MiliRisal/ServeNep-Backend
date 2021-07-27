@@ -15,7 +15,6 @@ const user = mongoose.model('user',{
         required:true,
         min:9,
         max:10,
-
     },
     address:{
         type:String,

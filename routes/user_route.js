@@ -6,10 +6,11 @@ const jwt = require('jsonwebtoken');
 const auth = require('../middleware/authcheck');
 const { json } = require('express');
 const { check, validationResult } = require('express-validator');
+const profile = require('../middleware/profile');
 
 //........Insert................
 router.post('/user/insert', [
-    check('fullName', "fullname is required!").not().isEmpty(),
+    check('fullName', "full Name is required!").not().isEmpty(),
     check('email', "User email is required!").not().isEmpty(),
     check('password', "User password is required!").not().isEmpty(),
     check('phone', "Phone number is required!").not().isEmpty(),
@@ -30,7 +31,7 @@ router.post('/user/insert', [
             user.findOne({ email: email })
                 .then((savedUser) => {
                     if (savedUser) {
-                        return res.status(422).json({ message: "User already exists with this email" })
+                        return res.status(422).json({ message: "User already exists with this email" });
                     }
 
                     bcryptjs.hash(password, 10, function (err, password) {
@@ -54,13 +55,13 @@ router.post('/user/insert', [
                                 });
                             })
                             .catch(error => {
-                                res.json({ message: error.message, success: false })
-                            })
-                    })
+                                res.json({ message: error.message, success: false });
+                            });
+                    });
                 })
                 .catch(err => {
-                    console.log(err)
-                })
+                    console.log(err);
+                });
 
         } else {
             console.log(ValidationError.array());
@@ -171,8 +172,20 @@ router.put('/specification/add/:userid', function (req, res) {
     const category = req.params.category;
     user.find({category:category}).exec(function(error, data){
         res.status(200).json({success : true,count: data.length, data});
-    })
-})
-   
+    });
+});
+
+   // image upload for user
+   router.put("/user/profile/:id",profile.single("profileImage"), async function(req, res){
+       if (req.file!==undefined){
+           try {
+               const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true , 
+                res:status(200).json({success: true,message:"image saved successfully",image:profileImage})});
+           } catch (error) {
+               res.status(500).json({error:error});
+               
+           }
+       }
+   });
 
 module.exports = router;

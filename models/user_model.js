@@ -26,19 +26,21 @@ const user = mongoose.model('user',{
     role:{
         type:String,
         enum : ['Tasker','Customer'],
-        default : 'Customer',
-        require:true
+        default : 'Customer'
     },
     category:{
         type:String,
-        enum : ['Cleaner','Electrician','Delivery','Carpenter','Plumber','Mechanic'],
+      
+        
     },
     price:{
         type:Number,
     },
     profileImage:{
         type:String,
-        trim:true
+        trim:true, 
+        default:"",
+        
     }
 });
 module.exports = user;

@@ -7,7 +7,6 @@ var bd = require('./database/db');
 
 var user_route = require('./routes/user_route');
 var description_route = require('./routes/description_route');
-var specification = require('./routes/specification_route');
 var booking = require('./routes/booking_route');
 var category = require('./routes/category_route');
 var notification = require('./routes/notification_route');
@@ -20,7 +19,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(user_route);
 app.use(description_route);
-app.use(specification);
 app.use(booking);
 app.use(category);
 app.use(notification);

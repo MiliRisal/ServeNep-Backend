@@ -129,15 +129,15 @@ router.get("/user/:user_id",auth.verifyuser, function (req, res) {
 
 });
 
-//............search by name
-router.get('/search/:fullName', function (req, res) {
-    var name = new RegExp(req.params.fullName, 'i');
-    user.find({ fullName: name })
-        .then((result) => {
-            res.status(200).json(result);
+// //............search by name
+// router.get('/search/:fullName', function (req, res) {
+//     var name = new RegExp(req.params.fullName, 'i');
+//     user.find({ fullName: name })
+//         .then((result) => {
+//             res.status(200).json(result);
 
-        });
-});
+//         });
+// });
 
 router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, function (req, res) {
     const fullName = req.body.fullName;

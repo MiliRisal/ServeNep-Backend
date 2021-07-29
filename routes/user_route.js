@@ -70,7 +70,7 @@ router.post('/user/insert', [
     });
 
 //...... user login
-router.post('/user/login',auth.verifyuser, function (req, res) {
+router.post('/user/login', function (req, res) {
     const email = req.body.email;
     const password = req.body.password; // sent from user
 

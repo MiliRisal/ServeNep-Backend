@@ -17,6 +17,7 @@
         "originalname",
         "secretkey",
         "servnep",
+        "taskers",
         "userdata",
         "userid",
         "usertype",

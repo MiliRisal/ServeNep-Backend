@@ -70,7 +70,7 @@ router.post('/user/insert', [
     });
 
 //...... user login
-router.post('/user/login', function (req, res) {
+router.post('/user/login',auth.verifyuser, function (req, res) {
     const email = req.body.email;
     const password = req.body.password; // sent from user
 
@@ -118,7 +118,7 @@ router.get('/user/all', function (req, res) {
         });
 });
 // get Single user...........
-router.get("/user/:user_id", function (req, res) {
+router.get("/user/:user_id",auth.verifyuser, function (req, res) {
     const id = req.params.user_id;
     user.findOne({ _id: id }).then(function (result) {
         res.status(200).json(result);
@@ -139,7 +139,7 @@ router.get('/search/:fullName', function (req, res) {
         });
 });
 
-router.put('/specification/add/:userid', function (req, res) {
+router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, function (req, res) {
     const fullName = req.body.fullName;
     const email = req.body.email;
     const phone = req.body.phone;
@@ -168,7 +168,7 @@ router.put('/specification/add/:userid', function (req, res) {
 });
 
  //this filters taskers according to category
- router.get("/tasker/:category", function(req,res){
+ router.get("/tasker/:category",auth.verifyuser, function(req,res){
     const category = req.params.category;
     user.find({category:category}).exec(function(error, data){
         res.status(200).json({success : true,count: data.length, data});
@@ -176,7 +176,7 @@ router.put('/specification/add/:userid', function (req, res) {
 });
 
    // image upload for user
-   router.put("/user/profile/:id",profile.single("profileImage"), async function(req, res){
+   router.put("/user/profile/:id",auth.verifyuser,profile.single("profileImage"), async function(req, res){
        if (req.file!==undefined){
            try {
                const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true , 

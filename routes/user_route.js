@@ -117,6 +117,7 @@ router.get('/user/all', function (req, res) {
             res.status(500).json({ error: err });
         });
 });
+
 // get Single user...........
 router.get("/user/:user_id",auth.verifyuser, function (req, res) {
     const id = req.params.user_id;

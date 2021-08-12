@@ -151,11 +151,7 @@ router.get("/user/:user_id",auth.verifyuser, function (req, res) {
 //         });
 // });
 
-<<<<<<< HEAD
 router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
-=======
-router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, function (req, res) {
->>>>>>> f5ab0d82c3bfc63375dc5e7409207c414edb51ac
     const fullName = req.body.fullName;
     const email = req.body.email;
     const phone = req.body.phone;
@@ -182,11 +178,7 @@ router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, funct
 });
 
  //this filters taskers according to category
-<<<<<<< HEAD
  router.get("/tasker/:category", auth.verifyuser, function(req,res){
-=======
- router.get("/tasker/:category",auth.verifyuser, function(req,res){
->>>>>>> f5ab0d82c3bfc63375dc5e7409207c414edb51ac
     const category = req.params.category;
     user.find({category:category}).exec(function(error, data){
         res.status(200).json({success : true,count: data.length, data});

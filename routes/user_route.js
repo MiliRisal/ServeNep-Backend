@@ -107,6 +107,17 @@ router.post('/user/login', function (req, res) {
         });
 });
 
+//get user: my profile
+router.get("/user/me", auth.verifyuser, async (req,res)=>{
+    try{
+    const user1= await user.findOne(req.userInfo._id) 
+    res.status(200).json({success:true, data:user1});  
+    }
+    catch(e){
+       
+    }
+})
+
 //......... get all user 
 router.get('/user/all', function (req, res) {
     user.find()
@@ -139,7 +150,7 @@ router.get('/search/:fullName', function (req, res) {
         });
 });
 
-router.put('/specification/add/:userid', function (req, res) {
+router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
     const fullName = req.body.fullName;
     const email = req.body.email;
     const phone = req.body.phone;
@@ -147,7 +158,6 @@ router.put('/specification/add/:userid', function (req, res) {
     const price = req.body.price;
     const category = req.body.category;
     const id = req.body.userid;
-    const profileImage = req.file.path;
 
     user.updateOne({ _id: id }, {
         fullName: fullName,
@@ -156,7 +166,6 @@ router.put('/specification/add/:userid', function (req, res) {
         address: address,
         price: price,
         category: category,
-        profileImage: profileImage,
     })
         .then(function (result) {
             res.status(200).json({ success: true, message: "user specification added successful" });
@@ -168,7 +177,7 @@ router.put('/specification/add/:userid', function (req, res) {
 });
 
  //this filters taskers according to category
- router.get("/tasker/:category", function(req,res){
+ router.get("/tasker/:category", auth.verifyuser, function(req,res){
     const category = req.params.category;
     user.find({category:category}).exec(function(error, data){
         res.status(200).json({success : true,count: data.length, data});

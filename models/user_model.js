@@ -30,11 +30,12 @@ const user = mongoose.model('user',{
     },
     category:{
         type:String,
-      
+       
         
     },
     price:{
-        type:Number,
+        type:String,
+        
     },
     profileImage:{
         type:String,

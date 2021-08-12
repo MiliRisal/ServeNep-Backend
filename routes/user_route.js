@@ -128,8 +128,9 @@ router.get('/user/all', function (req, res) {
             res.status(500).json({ error: err });
         });
 });
+
 // get Single user...........
-router.get("/user/:user_id", function (req, res) {
+router.get("/user/:user_id",auth.verifyuser, function (req, res) {
     const id = req.params.user_id;
     user.findOne({ _id: id }).then(function (result) {
         res.status(200).json(result);
@@ -140,17 +141,21 @@ router.get("/user/:user_id", function (req, res) {
 
 });
 
-//............search by name
-router.get('/search/:fullName', function (req, res) {
-    var name = new RegExp(req.params.fullName, 'i');
-    user.find({ fullName: name })
-        .then((result) => {
-            res.status(200).json(result);
+// //............search by name
+// router.get('/search/:fullName', function (req, res) {
+//     var name = new RegExp(req.params.fullName, 'i');
+//     user.find({ fullName: name })
+//         .then((result) => {
+//             res.status(200).json(result);
 
-        });
-});
+//         });
+// });
 
+<<<<<<< HEAD
 router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
+=======
+router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, function (req, res) {
+>>>>>>> f5ab0d82c3bfc63375dc5e7409207c414edb51ac
     const fullName = req.body.fullName;
     const email = req.body.email;
     const phone = req.body.phone;
@@ -177,7 +182,11 @@ router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
 });
 
  //this filters taskers according to category
+<<<<<<< HEAD
  router.get("/tasker/:category", auth.verifyuser, function(req,res){
+=======
+ router.get("/tasker/:category",auth.verifyuser, function(req,res){
+>>>>>>> f5ab0d82c3bfc63375dc5e7409207c414edb51ac
     const category = req.params.category;
     user.find({category:category}).exec(function(error, data){
         res.status(200).json({success : true,count: data.length, data});
@@ -185,7 +194,7 @@ router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
 });
 
    // image upload for user
-   router.put("/user/profile/:id",profile.single("profileImage"), async function(req, res){
+   router.put("/user/profile/:id",auth.verifyuser,profile.single("profileImage"), async function(req, res){
        if (req.file!==undefined){
            try {
                const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true , 

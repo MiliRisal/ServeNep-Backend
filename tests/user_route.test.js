@@ -12,35 +12,46 @@ describe('Test for user route', () => {
     test('should be able to register a user', () => {
         return request(app).post('/user/insert')
         .send({
-            "fullName":"kiran Gautam",
-            "phone": "980898989",
-            "email": "gautamkiran38@gmail.com",
-            "address": "Maitidevi, Kathmandu",
-             "password": "password"
+            "fullName": "jitendra Sah",
+            "phone": "9824295932",
+            "email": "jitendra731@gmail.com",
+            "address": "Janakpur",
+            "role": "Customer",
+            "password": "jetu@123",
+            "price": "10000",
+            "category": "Electrician"
         })
         .then(res => {
             expect(res.statusCode).toBe(201);
         });
     });
 
-    test('should not be able to register a user without a phone no', () => {
+    test('should not be able to register a user without a category', () => {
         return request(app).post('/user/insert')
         .send({
-            "fullName":"kiran Gautam",
-            "email": "gautamkiran38@gmail.com",
-            "address": "Maitidevi, Kathmandu",
-             "password": "password"
+
+            "fullName": "jitendra Sah",
+            "phone": "9824295932",
+            "email": "jitendra731@gmail.com",
+            "address": "Janakpur",
+            "role": "Customer",
+            "password": "jetu@123",
+            "price": "10000",
+
+           
         })
         .then(res => {
             expect(res.statusCode).toBe(200);
         });
     });
 
+
+
     test('should be able to login', ()=> {
         return request(app).post('/user/login')
         .send({
-            "email": "gautamkiran38@gmail.com",
-            "password": "password"
+            "email": "jitendra731@gmail.com",
+            "password": "jetu@123",
             
         })
         .then(res=> {
@@ -52,8 +63,8 @@ describe('Test for user route', () => {
         return request(app).post('/user/login')
         .send({
 
-             "email": "gautamkiran38@gmail.com",
-            "password": "password"
+            "email": "jitendra731@gmail.com",
+         
            
         })
         .then(res=> {
@@ -61,5 +72,4 @@ describe('Test for user route', () => {
         });
     });
 
-    
 });

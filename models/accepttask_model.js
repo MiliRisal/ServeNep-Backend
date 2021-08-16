@@ -9,7 +9,7 @@ var accepttask = mongoose.model('accepttask',{
     },
     date:{
         type:Date,
-        default:date.now
+        default:Date.now
     },
     userid:{
         type:Object,

@@ -11,6 +11,7 @@ var booking = require('./routes/booking_route');
 var category = require('./routes/category_route');
 var notification = require('./routes/notification_route');
 var accepttask= require('./routes/accepttask_route');
+var feedback = require('./routes/feedback_route');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(booking);
 app.use(category);
 app.use(notification);
 app.use(accepttask);
+app.use(feedback);
 
 app.listen(90, () => {
     console.log("This server is running at port : 90");

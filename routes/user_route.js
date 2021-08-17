@@ -26,6 +26,7 @@ router.post('/user/insert', [
             const role = req.body.role;
             const password = req.body.password;
             const price = req.body.price;
+            const bio = req.body.bio;
             const category = req.body.category;
 
             user.findOne({ email: email })
@@ -41,6 +42,7 @@ router.post('/user/insert', [
                             email: email,
                             address: address,
                             role: role,
+                            bio : bio,
                             password: password,
                             price: price,
                             category: category,
@@ -96,7 +98,7 @@ router.post('/user/login', function (req, res) {
                 res.status(200).json({
                     token: token,
                     success: true,
-                    role: userdata.role
+                    data: userdata
 
                 });
 
@@ -106,6 +108,17 @@ router.post('/user/login', function (req, res) {
             res.status(500).json({ Error: e });
         });
 });
+
+//get user: my profile
+router.get("/user/me", auth.verifyuser, async (req,res)=>{
+    try{
+    const user1= await user.findOne(req.userInfo._id) 
+    res.status(200).json({success:true, data:user1});  
+    }
+    catch(e){
+       
+    }
+})
 
 //......... get all user 
 router.get('/user/all', function (req, res) {
@@ -117,6 +130,7 @@ router.get('/user/all', function (req, res) {
             res.status(500).json({ error: err });
         });
 });
+
 // get Single user...........
 router.get("/user/:user_id",auth.verifyuser, function (req, res) {
     const id = req.params.user_id;
@@ -139,15 +153,15 @@ router.get("/user/:user_id",auth.verifyuser, function (req, res) {
 //         });
 // });
 
-router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, function (req, res) {
+router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
     const fullName = req.body.fullName;
     const email = req.body.email;
     const phone = req.body.phone;
     const address = req.body.address;
     const price = req.body.price;
+    const bio = req.body.bio;
     const category = req.body.category;
-    const id = req.body.userid;
-    const profileImage = req.file.path;
+    const id = req.params.userid;
 
     user.updateOne({ _id: id }, {
         fullName: fullName,
@@ -155,8 +169,8 @@ router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, funct
         phone: phone,
         address: address,
         price: price,
+        bio: bio,
         category: category,
-        profileImage: profileImage,
     })
         .then(function (result) {
             res.status(200).json({ success: true, message: "user specification added successful" });
@@ -168,7 +182,7 @@ router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, funct
 });
 
  //this filters taskers according to category
- router.get("/tasker/:category",auth.verifyuser, function(req,res){
+ router.get("/tasker/:category", auth.verifyuser, function(req,res){
     const category = req.params.category;
     user.find({category:category}).exec(function(error, data){
         res.status(200).json({success : true,count: data.length, data});
@@ -179,8 +193,8 @@ router.put('/specification/add/:userid',auth.verifyuser,auth.verifyTasker, funct
    router.put("/user/profile/:id",auth.verifyuser,profile.single("profileImage"), async function(req, res){
        if (req.file!==undefined){
            try {
-               const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true , 
-                res:status(200).json({success: true,message:"image saved successfully",image:profileImage})});
+               const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true}) 
+                res:status(200).json({success: true,message:"image saved successfully",profileImage:image});
            } catch (error) {
                res.status(500).json({error:error});
                

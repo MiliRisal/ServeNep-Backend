@@ -11,6 +11,7 @@
         "authcheck",
         "customerdata",
         "descriptionid",
+        "feedbackdata",
         "gridfs",
         "kiran",
         "notificationtoall",

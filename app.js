@@ -24,6 +24,8 @@ app.use(description_route);
 app.use(booking);
 app.use(category);
 app.use(notification);
+app.use(accepttask);
+app.use(feedback);
 
 app.use(express.static('public'))
 app.use(accepttask);

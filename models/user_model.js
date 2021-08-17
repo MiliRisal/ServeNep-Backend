@@ -38,6 +38,7 @@ const user = mongoose.model('user',{
     bio:{
         type: String,
         maxlength: 200 
+
     },
     profileImage:{
         type:String,

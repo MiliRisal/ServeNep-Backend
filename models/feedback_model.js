@@ -1,11 +1,11 @@
 const mongoose=require('mongoose');
 const feedback = mongoose.model('feedback',{
 
-    Title:{
+    feedtitle:{
         type:String,
     },
 
-     description:{
+     feeddescription:{
      type:String
         
      }

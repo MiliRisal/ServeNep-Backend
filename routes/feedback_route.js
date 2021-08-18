@@ -4,13 +4,13 @@ const router = express.Router();
 
 router.post('/feedback/insert', function (req, res){
   
-    const description = req.body.description;
-    const title = req.body.title;
+    const feeddescription = req.body.feeddescription;
+    const feedtitle = req.body.feedtitle;
 
     const feedbackdata = new feedback({
     
-        description: description,
-        title: title,
+       feeddescription: feeddescription,
+        feedtitle: feedtitle,
     });
     feedbackdata.save()
     .then(function(result){

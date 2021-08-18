@@ -30,16 +30,18 @@ const user = mongoose.model('user',{
     },
     category:{
         type:String,
-       
-        
     },
     price:{
         type:String,
         
     },
+    bio:{
+        type: String,
+        maxlength: 200 
+
+    },
     profileImage:{
         type:String,
-        trim:true, 
         default:"",
         
     }

@@ -10,7 +10,7 @@ module.exports.verifyuser = function(req, res, next) {
         const data1 = jwt.verify(token, 'secretkey');
         // we have id only
        // console.log(data.customerdata._id)
-        User.findOne({_id:data1.CustomerId})
+        User.findOne({_id:data1.userId})
         .then (function(result){
             req.userInfo = result;   // all information about the user (username, password, usertype)
             next();

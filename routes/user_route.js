@@ -26,6 +26,7 @@ router.post('/user/insert', [
             const role = req.body.role;
             const password = req.body.password;
             const price = req.body.price;
+            const bio = req.body.bio;
             const category = req.body.category;
 
             user.findOne({ email: email })
@@ -41,6 +42,7 @@ router.post('/user/insert', [
                             email: email,
                             address: address,
                             role: role,
+                            bio : bio,
                             password: password,
                             price: price,
                             category: category,
@@ -96,7 +98,7 @@ router.post('/user/login', function (req, res) {
                 res.status(200).json({
                     token: token,
                     success: true,
-                    role: userdata.role
+                    data: userdata
 
                 });
 
@@ -157,8 +159,9 @@ router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
     const phone = req.body.phone;
     const address = req.body.address;
     const price = req.body.price;
+    const bio = req.body.bio;
     const category = req.body.category;
-    const id = req.body.userid;
+    const id = req.params.userid;
 
     user.updateOne({ _id: id }, {
         fullName: fullName,
@@ -166,6 +169,7 @@ router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
         phone: phone,
         address: address,
         price: price,
+        bio: bio,
         category: category,
     })
         .then(function (result) {
@@ -189,8 +193,8 @@ router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
    router.put("/user/profile/:id",auth.verifyuser,profile.single("profileImage"), async function(req, res){
        if (req.file!==undefined){
            try {
-               const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true , 
-                res:status(200).json({success: true,message:"image saved successfully",image:profileImage})});
+               const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true}) 
+                res:status(200).json({success: true,message:"image saved successfully",profileImage:image});
            } catch (error) {
                res.status(500).json({error:error});
                

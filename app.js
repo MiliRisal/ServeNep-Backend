@@ -27,6 +27,9 @@ app.use(notification);
 app.use(accepttask);
 app.use(feedback);
 
+app.use(express.static('public'))
+app.use(accepttask);
+app.use(feedback);
 app.listen(90, () => {
     console.log("This server is running at port : 90");
 });

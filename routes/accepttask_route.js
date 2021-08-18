@@ -1,6 +1,6 @@
 var express =require('express');
 
-var accepttask = require('../models/accept_model');
+var accepttask = require('../models/accepttask_model');
 
 var router = express.Router();
 

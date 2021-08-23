@@ -12,9 +12,9 @@ var accepttask = mongoose.model('accepttask',{
         default:Date.now
 
     },
-    userid:{
+    acceptedby:{
         type:Object,
-        ref:'user',
+        ref:'user'
     },
 });
 module.exports = accepttask;

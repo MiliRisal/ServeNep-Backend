@@ -9,10 +9,12 @@ router.post('/category/insert',upload.single('image'), function(req, res){
         message:"jpg and png format allowed"});
     }
     const categoryName =req.body.categoryName;
-    const image =req.file.path;
+    const categoryDesc = req.body.categoryDesc;
+    const image =req.file.filename;
 
     const categoryData = new category({
         categoryName: categoryName,
+        categoryDesc : categoryDesc,
         image: image,
     });
     categoryData.save()
@@ -26,7 +28,7 @@ router.post('/category/insert',upload.single('image'), function(req, res){
 //get all category information
 router.get('/category/all', function(req, res){
     category.find().then(function(data){
-        res.status(200).json({data});
+        res.status(200).json({success:true, data});
     })
     .catch(function(error){
         res.status(500).json({error:error});
@@ -35,8 +37,8 @@ router.get('/category/all', function(req, res){
 // get single category information
 router.get('/category/:category_id', function(req, res){
     const id =req.params.category_id;
-    category.findOne({_id:id}).then(function(result){
-        res.status(200).json(result);
+    category.findOne({_id:id}).then(function(data){
+        res.status(200).json({success:true, data});
     })
     .catch(function(err){
         res.status(500).json({error:err});

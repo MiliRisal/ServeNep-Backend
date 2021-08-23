@@ -8,7 +8,7 @@ const { json } = require('express');
 const { check, validationResult } = require('express-validator');
 const profile = require('../middleware/profile');
 
-//........Insert................
+//........Insert user................
 router.post('/user/insert', [
     check('fullName', "full Name is required!").not().isEmpty(),
     check('email', "User email is required!").not().isEmpty(),
@@ -99,7 +99,6 @@ router.post('/user/login', function (req, res) {
                     token: token,
                     success: true,
                     data: userdata
-
                 });
 
             });
@@ -131,7 +130,7 @@ router.get('/user/all', function (req, res) {
         });
 });
 
-// get Single user...........
+// get Single user by id...........
 router.get("/user/:user_id",auth.verifyuser, function (req, res) {
     const id = req.params.user_id;
     user.findOne({ _id: id }).then(function (result) {
@@ -143,16 +142,7 @@ router.get("/user/:user_id",auth.verifyuser, function (req, res) {
 
 });
 
-// //............search by name
-// router.get('/search/:fullName', function (req, res) {
-//     var name = new RegExp(req.params.fullName, 'i');
-//     user.find({ fullName: name })
-//         .then((result) => {
-//             res.status(200).json(result);
-
-//         });
-// });
-
+//User Update...............
 router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
     const fullName = req.body.fullName;
     const email = req.body.email;
@@ -184,22 +174,22 @@ router.put('/user/update/:userid', auth.verifyuser, function (req, res) {
  //this filters taskers according to category
  router.get("/tasker/:category", auth.verifyuser, function(req,res){
     const category = req.params.category;
-    user.find({category:category}).exec(function(error, data){
-        res.status(200).json({success : true,count: data.length, data});
+    user.find({category:category}).then(function(data){ 
+        res.status(200).json({success : true, data});
     });
 });
 
-   // image upload for user
-   router.put("/user/profile/:id",auth.verifyuser,profile.single("profileImage"), async function(req, res){
-       if (req.file!==undefined){
-           try {
-               const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true}) 
-                res:status(200).json({success: true,message:"image saved successfully",profileImage:image});
-           } catch (error) {
-               res.status(500).json({error:error});
-               
-           }
-       }
-   });
+// image upload for user
+router.put("/user/profile/:id",auth.verifyuser,profile.single("profileImage"), async function(req, res){
+    if (req.file!==undefined){
+        try {
+            const image =await user.findOneAndUpdate({_id:req.params.id},{$set:{profileImage:req.file.filename}} ,{new :true}) 
+            res:status(200).json({success: true,message:"image saved successfully",profileImage:image});
+        } catch (error) {
+            res.status(500).json({error:error});
+            
+        }
+    }
+});
 
 module.exports = router;

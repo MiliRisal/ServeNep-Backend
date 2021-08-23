@@ -1,23 +1,28 @@
-var express =require('express');
-var description = require('../models/description_model');
-var auth = require('../middleware/authcheck');
-var router = express.Router();
+const express =require('express');
+const description = require('../models/description_model');
+const auth = require('../middleware/authcheck');
+const router = express.Router();
 
-router.post('/description/insert',
-// auth.verifyuser,auth.verifyCustomer, 
+// booking tasker 
+router.post('/description/insert', 
+ auth.verifyuser,
 function(req, res){
-    var title = req.body.title;
-    var taskDescription= req.body.taskDescription;
-    var  estimatedTime = req.body.estimatedTime;
-    var price = req.body.price;
-    var addedby=req.user;
+    const bookedUserId = req.body.bookedUserId;
+    const title = req.body.title;
+    const taskDescription= req.body.taskDescription;
+    const estimatedTime = req.body.estimatedTime;
+    const price = req.body.price;
+    const status = req.body.status;
+    const addedby=req.userInfo;
 
-    var descriptionData = new description({
+    const descriptionData = new description({
+        bookedUserId : bookedUserId,
         title: title,
         taskDescription: taskDescription,
         estimatedTime: estimatedTime,
         price: price,
-        addedby: addedby,
+        status : status,
+        addedby: addedby
 
     });
     descriptionData.save()
@@ -28,8 +33,8 @@ function(req, res){
     });
 });
 
-router.get('/description/all',
-// auth.verifyuser
+//get all boking details
+router.get('/description/all', auth.verifyuser, 
  function(req, res){
     description.find().then(function(data){
         res.status(200).json({success: true, data});
@@ -39,8 +44,8 @@ router.get('/description/all',
    });
 });
 
-router.get('/description/:description_id',
-// auth.verifyuser, 
+//get booking details by booking id
+router.get('/description/:description_id', auth.verifyuser, 
 function(req, res){
     const id = req.params.description_id;
     description.findOne({_id:id}).then(function(result){
@@ -53,20 +58,22 @@ function(req, res){
 router.put('/description/update/:description_id',
 // auth.verifyuser,auth.verifyCustomer,
  function(req, res){
-    var title = req.body.title;
-    var taskDescription= req.body.taskDescription;
-    var  estimatedTime = req.body.estimatedTime;
-    var price = req.body.price;
-    const id=req.params.description_id;
+    const title = req.body.title;
+    const taskDescription= req.body.taskDescription;
+    const estimatedTime = req.body.estimatedTime;
+    const price = req.body.price;
+    const status = req.body.status;
+    const id = req.params.description_id;
 
     description.findOne({_id:id},{
         title: title,
         taskDescription: taskDescription,
         estimatedTime: estimatedTime,
         price: price,
+        status : status
     })
     .then(function(result) {
-        res.status(200).json({success:true,message: " description Update Success"});
+        res.status(200).json({success:true,message: "description Update Success"});
     })
     .catch(function(error){
         res.status(500).json({error:error});

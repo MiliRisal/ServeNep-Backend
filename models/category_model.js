@@ -1,11 +1,14 @@
 var mongoose=require('mongoose');
 var category = mongoose.model('category',{
    categoryName:{
-        type:String, 
-     },
+      type:String, 
+   },
+   categoryDesc:{
+      type:String, 
+   },
    image:{
-    type:String,
-    trim:true
+      type:String,
+      trim:true
    }
 });
 module.exports = category;

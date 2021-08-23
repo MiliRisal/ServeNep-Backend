@@ -1,6 +1,9 @@
 var mongoose=require('mongoose');
 
 var description = mongoose.model('description',{
+    bookedUserId:{
+        type: String
+    },
     title:{
         type:String,
         require:true
@@ -18,5 +21,8 @@ var description = mongoose.model('description',{
         type: Object,
         ref:'user',
     },
+    status:{
+        type: String
+    }
 });
 module.exports = description;

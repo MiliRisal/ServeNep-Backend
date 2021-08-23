@@ -9,10 +9,12 @@ router.post('/accept/insert',
     var userid=req.userid;
     var title= req.body.title;
     var description= req.body.description;
+    var acceptedby = req.req.userInfo;
     var acceptData = new accepttask({
         userid: userid,
         title: title,
         description: description,
+        acceptedby : acceptedby
     });
     acceptData.save()
     .then(function(result){

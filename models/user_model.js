@@ -37,6 +37,7 @@ const user = mongoose.model('user',{
     },
     bio:{
         type: String,
+        default:"",
         maxlength: 200 
 
     },

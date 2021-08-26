@@ -33,10 +33,8 @@ module.exports.verifyTasker = function(req,res,next) {
     }
     else if(req.userInfo.role !=='Tasker'){
         return req.status(401).json({message : "Unauthorized!!"});
-
     }
     next();
-
 }
 
 // guard for customer .................

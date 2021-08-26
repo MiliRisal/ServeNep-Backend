@@ -18,10 +18,6 @@ var description = mongoose.model('description',{
         type:String,
     },
     addedby:{
-        type: Object,
-        ref:'user',
-    },
-    status:{
         type: String
     }
 });

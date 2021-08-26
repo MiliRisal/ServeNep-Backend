@@ -12,8 +12,7 @@ function(req, res){
     const taskDescription= req.body.taskDescription;
     const estimatedTime = req.body.estimatedTime;
     const price = req.body.price;
-    const status = req.body.status;
-    const addedby=req.userInfo;
+    const addedby=req.body.addedby;
 
     const descriptionData = new description({
         bookedUserId : bookedUserId,
@@ -21,7 +20,6 @@ function(req, res){
         taskDescription: taskDescription,
         estimatedTime: estimatedTime,
         price: price,
-        status : status,
         addedby: addedby
 
     });
@@ -44,33 +42,44 @@ router.get('/description/all', auth.verifyuser,
    });
 });
 
+//get booking details for user
+router.get("/booking/:id", auth.verifyuser, function(req,res){
+    const id = req.params.id;
+    description.find({addedby:id}).then(
+        function(data){
+            res.status(200).json({success: true, data});
+        }).catch(function(error){
+            res.status(500).json({error: error});
+        })
+});
+
+
 //get booking details by booking id
-router.get('/description/:description_id', auth.verifyuser, 
+router.get('/description/:bookedUserId', auth.verifyuser, 
 function(req, res){
-    const id = req.params.description_id;
-    description.findOne({_id:id}).then(function(result){
-        res.status(200).json({success: true, result});
+    const id = req.params.bookedUserId;
+    description.find({bookedUserId:id}).then(function(data){
+        res.status(200).json({success: true, data});
     })
     .catch(function(error){
         res.status(500).json({error:error});
     });
 });
+
 router.put('/description/update/:description_id',
-// auth.verifyuser,auth.verifyCustomer,
+ auth.verifyuser,
  function(req, res){
     const title = req.body.title;
     const taskDescription= req.body.taskDescription;
     const estimatedTime = req.body.estimatedTime;
     const price = req.body.price;
-    const status = req.body.status;
     const id = req.params.description_id;
 
-    description.findOne({_id:id},{
+    description.updateOne({_id:id},{
         title: title,
         taskDescription: taskDescription,
         estimatedTime: estimatedTime,
-        price: price,
-        status : status
+        price: price
     })
     .then(function(result) {
         res.status(200).json({success:true,message: "description Update Success"});
@@ -81,15 +90,15 @@ router.put('/description/update/:description_id',
 
 });
 
-router.delete("/description/delete/:description_id",
-// auth.verifyuser, 
+
+router.delete("/description/delete/:id", auth.verifyuser, 
 function(req,res){
-    const id =req.params.description_id;
+    const id =req.params.id;
     description.deleteOne({_id:id}).then(function(result){
-    res.status(200).json({success:true, message:"description Delete Success"});
-}).catch(function (error){
-    res.status(500).json({error:error});
-});
+        res.status(200).json({success:true, message:"description Delete Success"});
+    }).catch(function (error){
+        res.status(500).json({error:error});
+    });
 });
 
 module.exports=router;

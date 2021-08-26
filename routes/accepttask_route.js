@@ -1,18 +1,22 @@
-var express =require('express');
-
-var accepttask = require('../models/accept_model');
-
-var router = express.Router();
+const express =require('express');
+const accepttask = require('../models/accept_model');
+const auth = require('../middleware/authcheck');
+const router = express.Router();
 
 router.post('/accept/insert',
  function(req, res){
-    var userid=req.userid;
-    var title= req.body.title;
-    var description= req.body.description;
-    var acceptedby = req.req.userInfo;
-    var acceptData = new accepttask({
+    const userid=req.body.userid;
+    const descTitle= req.body.descTitle;
+    const description= req.body.description;
+    const rate= req.body.rate;
+    const time = req.body.time;
+    const acceptedby = req.body.acceptedby;
+
+    const acceptData = new accepttask({
         userid: userid,
-        title: title,
+        descTitle :descTitle,
+        rate : rate,
+        time : time,
         description: description,
         acceptedby : acceptedby
     });
@@ -33,12 +37,23 @@ router.get('/accept/all',
         res.status(500).json({error:error});
    });
 });
-router.get('/accepttask/:accepttask_id',
-// auth.verifyuser, 
-function(req, res){
-    const id = req.params.accepttask_id;
-    accepttask.findOne({_id:id}).then(function(result){
-        res.status(200).json({success: true, result});
+
+//get accepted taskes for user
+router.get('/accepttask/user/:userid', auth.verifyuser, function(req, res){
+    const userid = req.params.userid;
+    accepttask.find({userid:userid}).then(function(data){
+        res.status(200).json({success: true, data});
+    })
+    .catch(function(error){
+        res.status(500).json({error:error});
+    });
+});
+
+//gt accepted taskes for tasker
+router.get('/accepttask/tasker/:acceptedby', auth.verifyuser, function(req, res){
+    const acceptedby = req.params.acceptedby;
+    accepttask.find({acceptedby:acceptedby}).then(function(data){
+        res.status(200).json({success: true, data});
     })
     .catch(function(error){
         res.status(500).json({error:error});

@@ -1,19 +1,32 @@
 var mongoose=require('mongoose');
 var accepttask = mongoose.model('accepttask',{
-    title:{
+    userid : {
+        type: String
+    },
+
+    descTitle:{
         type:String
     },
    
     description:{
         type:String,
+    }, 
+    
+    time:{
+        type:String,
     },
+    
+    rate:{
+        type:String,
+    },
+    
     date:{
         type:Date,
         default:Date.now
-
     },
+
     acceptedby:{
-        type:Object,
+        type:String,
         ref:'user'
     },
 });

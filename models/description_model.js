@@ -17,6 +17,12 @@ var description = mongoose.model('description',{
     price:{
         type:String,
     },
+    longitude:{
+        type: Number,
+    },
+    latitude:{
+        type: Number,
+    },
     addedby:{
         type: String
     }

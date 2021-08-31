@@ -12,6 +12,8 @@ function(req, res){
     const taskDescription= req.body.taskDescription;
     const estimatedTime = req.body.estimatedTime;
     const price = req.body.price;
+    const longitude = req.body.longitude;
+    const latitude = req.body.latitude;
     const addedby=req.body.addedby;
 
     const descriptionData = new description({
@@ -20,6 +22,8 @@ function(req, res){
         taskDescription: taskDescription,
         estimatedTime: estimatedTime,
         price: price,
+        latitude: latitude,
+        longitude: longitude,
         addedby: addedby
 
     });

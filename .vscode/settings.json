@@ -12,6 +12,8 @@
         "customerdata",
         "descriptionid",
         "feedbackdata",
+        "feeddescription",
+        "feedtitle",
         "gridfs",
         "kiran",
         "notificationtoall",

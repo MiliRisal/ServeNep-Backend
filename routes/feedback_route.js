@@ -1,16 +1,16 @@
-var express =require('express');
+const express =require('express');
 const feedback = require('../models/feedback_model');
-var booking = require('../models/feedback_model');
-const { route } = require('./user_route');
-var router = express.Router();
+const router = express.Router();
 
 router.post('/feedback/insert', function (req, res){
-    var userid = req.userid;
-    var description = req.body.description;
+  
+    const feeddescription = req.body.feeddescription;
+    const feedtitle = req.body.feedtitle;
 
-    var feedbackdata = new feedback({
-        userid: userid,
-        description: description,
+    const feedbackdata = new feedback({
+    
+       feeddescription: feeddescription,
+        feedtitle: feedtitle,
     });
     feedbackdata.save()
     .then(function(result){
@@ -23,7 +23,7 @@ router.post('/feedback/insert', function (req, res){
 
 router.get('/feedback/all', function (req, res){
     feedback.find().then(function(data){
-        res.status(200).json({data});
+        res.status(200).json({success: true, data});
     })
     .catch(function(e){
         res.status(500).json({error: e});
@@ -32,7 +32,7 @@ router.get('/feedback/all', function (req, res){
 
 router.get('/feedback/single/:feedback_id:', function (req, res){
     const id = req.params.feedback_id;
-    feedback.findOne({_id: id}, function(data){
+    feedback.findOne({_id: id}).then (function(data){
         res.status(200).json({data});
     })
     .catch(function(e){

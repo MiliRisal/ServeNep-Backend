@@ -111,13 +111,13 @@ router.post('/user/login', function (req, res) {
 //get user: my profile
 router.get("/user/me", auth.verifyuser, async (req,res)=>{
     try{
-    const user1= await user.findOne(req.userInfo._id) 
+    const user1= await user.findOne(req.userInfo._id); 
     res.status(200).json({success:true, data:user1});  
     }
     catch(e){
        
     }
-})
+});
 
 //......... get all user 
 router.get('/user/all', function (req, res) {

@@ -1,6 +1,6 @@
 
 const express =require('express');
-const accepttask = require('../models/accept_model');
+const accepttask = require('../models/accepttask_model');
 const auth = require('../middleware/authcheck');
 const router = express.Router();
 

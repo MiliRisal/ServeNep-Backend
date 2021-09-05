@@ -78,12 +78,16 @@ router.put('/description/update/:description_id',
     const estimatedTime = req.body.estimatedTime;
     const price = req.body.price;
     const id = req.params.description_id;
+    const latitude = req.body.latitude;
+    const longitude = req.body.longitude;
 
     description.updateOne({_id:id},{
         title: title,
         taskDescription: taskDescription,
         estimatedTime: estimatedTime,
-        price: price
+        price: price,
+        latitude : latitude,
+        longitude : longitude,
     })
     .then(function(result) {
         res.status(200).json({success:true,message: "description Update Success"});

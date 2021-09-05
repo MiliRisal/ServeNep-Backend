@@ -24,7 +24,12 @@ var accepttask = mongoose.model('accepttask',{
         type:Date,
         default:Date.now
     },
-
+    latitude:{
+        type: Number
+    },
+    longitude:{
+        type: Number
+    },
     acceptedby:{
         type:String,
         ref:'user'

@@ -10,7 +10,7 @@ const profile = require('../middleware/profile');
 
 //........Insert user................
 router.post('/user/insert', [
-    check('fullName', "full Name is required!").not().isEmpty(),
+    check('fullName', "Full Name is required!").not().isEmpty(),
     check('email', "User email is required!").not().isEmpty(),
     check('password', "User password is required!").not().isEmpty(),
     check('phone', "Phone number is required!").not().isEmpty(),
@@ -133,8 +133,8 @@ router.get('/user/all', function (req, res) {
 // get Single user by id...........
 router.get("/user/:user_id",auth.verifyuser, function (req, res) {
     const id = req.params.user_id;
-    user.findOne({ _id: id }).then(function (result) {
-        res.status(200).json(result);
+    user.findOne({ _id: id }).then(function (data) {
+        res.status(200).json({success : true, data});
     })
         .catch(function (er) {
             res.status(200).json({ error: er });

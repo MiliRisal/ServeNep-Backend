@@ -11,6 +11,8 @@ router.post('/accept/insert',
     const description= req.body.description;
     const rate= req.body.rate;
     const time = req.body.time;
+    const longitude = req.body.longitude;
+    const latitude = req.body.latitude;
     const acceptedby = req.body.acceptedby;
 
     const acceptData = new accepttask({
@@ -19,7 +21,9 @@ router.post('/accept/insert',
         rate : rate,
         time : time,
         description: description,
-        acceptedby : acceptedby
+        acceptedby : acceptedby,
+        longitude : longitude,
+        latitude : latitude
     });
     acceptData.save()
     .then(function(result){
